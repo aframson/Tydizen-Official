@@ -40,7 +40,7 @@ export default class Register extends React.Component {
         
         this.setState({loading:true},()=>{
 
-            fetch('http://ttgdata.brichghana.com/passbook/route.php?func=fetchDetail',{
+            fetch('http://ttgdata.brichghana.com/tydi/route.php?func=Register',{
                 method:'POST',
                 headers: 
                 {
@@ -48,15 +48,27 @@ export default class Register extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body:JSON.stringify({
-                     name:this.props.data.name
+                    fname:this.state.fname,
+                    lname:this.state.lname,
+                    phone:this.state.phone,
+                    dist:this.state.dist,
+                    email:this.state.email,
+                    pass:this.state.pass,
                 })
       
                }).then((res)=>res.json()).then((resJson)=>{
 
                       
 
-                      this.setState({data:resJson});
+                      this.setState({reg_data:resJson,loading:false});
 
+
+                      alert(this.state.reg_data[0]);
+
+
+
+               }).catch((error)=>{
+                     alert(error)
                })
 
         })
@@ -110,54 +122,47 @@ export default class Register extends React.Component {
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'First Name...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({fname:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'Last Name...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({lname:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'Phone...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({phone:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'District...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({dist:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'Email...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({email:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'Password...'}
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({pass:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
                             <TextInput
                                 style={styles.inp}
                                 placeholder={'Verify Password...'}
-                                placeholderTextColor='red'
-                                onChangeText={() => { }}
+                                onChangeText={(data) => {this.setState({cpass:data}) }}
                                 placeholderTextColor='rgb(11, 156, 71)'
-
                             />
-                            <TouchableOpacity style={styles.agg} onPress={() => this.props.navigation.navigate('Register')}>
+                            
+                            <TouchableOpacity style={styles.agg} onPress={() => this.reg_user()}>
                                 <Text style={styles.aggtxt}>REGISTER</Text>
                             </TouchableOpacity>
                             <View style={{ height: 350, width: '100%' }}>
