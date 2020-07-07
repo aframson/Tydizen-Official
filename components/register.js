@@ -63,13 +63,13 @@ export default class Register extends React.Component {
                       this.setState({reg_data:resJson,loading:false});
 
 
-                      alert(this.state.reg_data[0]);
-
+                      this.props.navigation.navigate("Home",...this.state.reg_data);
+                      
 
 
                }).catch((error)=>{
                      alert(error)
-               })
+                 })
 
         })
 

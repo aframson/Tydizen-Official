@@ -22,7 +22,10 @@ function Register()
 
     if(mysqli_query($con,"INSERT INTO tydi_users(fname,lname,phone,district,email,pass)VALUES('$fname','$lname','$phone','$dist','$email','$pass')"))
     {
-            $message[] = 'done';
+
+           $fetch = mysqli_query($con,"SELECT * FROM tydi_users where email = '$email' AND pass = '$pass'   ");
+           $row = mysqli_fetch_array($fetch);
+            $message[] = $row;
     }
 
 
